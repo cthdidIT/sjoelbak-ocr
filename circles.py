@@ -7,7 +7,7 @@ import sys
 def find_lines(path):
     img = cv2.imread(path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+    edges = cv2.Canny(gray, 100, 150, apertureSize=3)
 
     minLineLength = 250
     maxLineGap = 30
