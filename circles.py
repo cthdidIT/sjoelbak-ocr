@@ -9,10 +9,11 @@ def find_lines(path):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 
-    minLineLength = 100
+    minLineLength = 250
     maxLineGap = 30
-    lines = cv2.HoughLinesP(edges, 2, np.pi / 180, 100,
+    lines = cv2.HoughLinesP(edges, 2, np.pi / 240, 80,
                             minLineLength=minLineLength, maxLineGap=maxLineGap)
+
 
     if lines is not None:
         print "found %s lines" % len(lines)
@@ -37,7 +38,7 @@ def process_image(path):
         cv2.line(cimg, (x1, y1),
                  (x2, y2), (0, 255, 0), 2)
 
-    cv2.imshow("Keypoints", cimg)
+    cv2.imwrite("keypoints.jpg", cimg)
     cv2.waitKey(0)
 
 
