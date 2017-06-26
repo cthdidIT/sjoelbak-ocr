@@ -38,7 +38,9 @@ def process_image(path):
         cv2.line(cimg, (x1, y1),
                  (x2, y2), (0, 255, 0), 2)
 
-    cv2.imwrite("keypoints.jpg", cimg)
+    new_path = path.split("/")[-1][:-4]
+
+    cv2.imwrite("processed/" + new_path+"-keypoints.jpg", cimg)
     cv2.waitKey(0)
 
 
