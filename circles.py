@@ -15,7 +15,7 @@ def find_lines(path):
                             minLineLength, maxLineGap)
 
     if lines is not None:
-        print "found %s lines" % len(lines[0])
+        print "found %s lines" % len(lines)
 
         return lines
     else:
@@ -32,7 +32,8 @@ def process_image(path):
     for x, y, radius in circles[0]:
         cv2.circle(cimg, (x, y), radius, (0, 0, 255), 2)
 
-    for x1, y1, x2, y2 in lines[0]:
+    for line in lines:
+        x1, y1, x2, y2 = line[0]
         cv2.line(cimg, (x1, y1),
                  (x2, y2), (0, 255, 0), 2)
 
