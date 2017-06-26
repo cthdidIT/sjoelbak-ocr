@@ -12,7 +12,7 @@ def find_lines(path):
     minLineLength = 100
     maxLineGap = 30
     lines = cv2.HoughLinesP(edges, 2, np.pi / 180, 100,
-                            minLineLength, maxLineGap)
+                            minLineLength=minLineLength, maxLineGap=maxLineGap)
 
     if lines is not None:
         print "found %s lines" % len(lines)
