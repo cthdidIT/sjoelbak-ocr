@@ -28,13 +28,23 @@ def bagify_lines(lines):
     x_threshold = 200
     table = dict()
 
+    max_k = -1
+    min_k = 99999
+    for l in lines:
+        x1, y1, x2, y2 = l[0]
+        k = abs((y2-y1)/(float(x2)-float(x1)+0.0000001))
+        max_k = max(max_k, k)
+        min_k = min(min_k, k)
+
+    avg_k = float(max_k + min_k)/2
+
     for l in lines:
         x1, y1, x2, y2 = l[0]
 
-        k = abs((y2-y1)/float(x2-x1))
+        k = abs((y2-y1)/(float(x2)-float(x1)+0.0000001))
 
         key = 'unknown'
-        if(k<5):
+        if(k<avg_k):
             key = 'horizontal'
         else:
             key = 'vertical'
@@ -124,14 +134,12 @@ def process_image(path):
     """
 
     table = bagify_lines(lines)
-    print table
+
     for key, value in table.iteritems():
         c1 = random.random() * 255
         c2 = random.random() * 255
         c3 = random.random() * 255
         for l in value:
-            print "hello line"
-            print l
             x1, y1, x2, y2 = l
             cv2.line(cimg, (x1, y1),
                      (x2, y2), (0, 255, 0), 2)
