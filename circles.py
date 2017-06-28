@@ -8,13 +8,12 @@ import random
 def find_lines(path):
     img = cv2.imread(path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+    edges = cv2.Canny(gray, 100, 150, apertureSize=3)
 
     minLineLength = 250
     maxLineGap = 30
     lines = cv2.HoughLinesP(edges, 2, np.pi / 240, 80,
                             minLineLength=minLineLength, maxLineGap=maxLineGap)
-
 
     if lines is not None:
         print "found %s lines" % len(lines)
@@ -146,8 +145,7 @@ def process_image(path):
 
     new_path = path.split("/")[-1][:-4]
 
-    cv2.imwrite("processed/" + new_path+"-keypoints.jpg", cimg)
-    cv2.waitKey(0)
+    cv2.imwrite("processed/" + new_path + "-keypoints.jpg", cimg)
 
 
 def find_circles(path):
